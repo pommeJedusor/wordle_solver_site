@@ -1,3 +1,7 @@
+"use client"
+
+import { WordleGame } from "@/utils/Game";
+
 function GreenArrow() {
   return (
     <>
@@ -23,7 +27,7 @@ function BlackArrow() {
   );
 }
 
-export function Arrow({must_rotate, color}: {must_rotate: boolean, color: string}) {
+export function Arrow({wordleGame, must_rotate, color, row, col}: {wordleGame: WordleGame, must_rotate: boolean, color: string, row: number, col: number}) {
   const rotation = must_rotate ? 180 : 0;
 
   let ArrowComponent = GreenArrow
@@ -33,8 +37,9 @@ export function Arrow({must_rotate, color}: {must_rotate: boolean, color: string
   else if (color == "B"){
     ArrowComponent = BlackArrow
   }
+
   return (
-    <svg className={"row-span-1 col-span-2 w-full h-full"} width="11" height="7" viewBox="0 0 22 14" transform={`rotate(${rotation} 0 0)`} xmlns="http://www.w3.org/2000/svg">
+    <svg onClick={()=>{wordleGame.changeColor(row, col, color)}} className="hover:opacity-75 row-span-1 col-span-2 w-full h-full" width="11" height="7" viewBox="0 0 22 14" transform={`rotate(${rotation} 0 0)`} xmlns="http://www.w3.org/2000/svg">
       <g id="arrow">
         <ArrowComponent />
       </g>

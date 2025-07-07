@@ -1,8 +1,10 @@
+"use client"
+
 function GreenSquare({letter}: {letter: string}){
   return (
     <>
       <div className={`grid row-span-2 col-span-2 w-full h-full bg-well-placed-letter-day dark:bg-well-placed-letter-night`}>
-        <p className="text-4xl font-[1000] text-white place-self-center cursor-default">{letter}</p>
+        <p className="text-4xl select-none font-[1000] text-white place-self-center cursor-default">{letter}</p>
       </div>
     </>
   )
@@ -12,7 +14,7 @@ function YellowSquare({letter}: {letter: string}){
   return (
     <>
       <div className={`grid row-span-2 col-span-2 w-full h-full bg-valid-letter-day dark:bg-valid-letter-night`}>
-        <p className="text-4xl font-[1000] text-white place-self-center cursor-default">{letter}</p>
+        <p className="text-4xl select-none font-[1000] text-white place-self-center cursor-default">{letter}</p>
       </div>
     </>
   )
@@ -22,7 +24,7 @@ function BlackSquare({letter}: {letter: string}){
   return (
     <>
       <div className={`grid row-span-2 col-span-2 w-full h-full bg-unvalid-letter-day dark:bg-unvalid-letter-night`}>
-        <p className="text-4xl font-[1000] text-white place-self-center cursor-default">{letter}</p>
+        <p className="text-4xl select-none font-[1000] text-white place-self-center cursor-default">{letter}</p>
       </div>
     </>
   )
