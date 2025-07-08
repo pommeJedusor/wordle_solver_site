@@ -14,7 +14,7 @@ function create_squares(wordle_game: WordleGame[]){
       squares.push(<Arrow wordleGame={wordleGame} row={i} col={j} color={previous_color} must_rotate={false} key={1000 + i * wordleGame.colors[0].length + j} />);
     }
     for(let j=0;j<wordleGame.colors[i].length;j++){
-      squares.push(<Square letter={wordleGame.letters[i][j]} color={wordleGame.colors[i][j]} key={i * wordleGame.colors[0].length + j}/>);
+      squares.push(<Square wordleGame={wordleGame} row={i} letter={wordleGame.letters[i][j]} color={wordleGame.colors[i][j]} key={i * wordleGame.colors[0].length + j}/>);
     }
     for(let j=0;i==wordleGame.current_row && j<wordleGame.colors[i].length;j++){
       const next_color = get_next_color(wordleGame.colors[i][j]);
