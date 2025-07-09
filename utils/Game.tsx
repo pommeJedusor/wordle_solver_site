@@ -7,20 +7,20 @@ export class WordleGame{
 
   constructor() {
     this.colors = [
-      ["Y", "B", "Y", "B", "Y"],
+      ["B", "B", "B", "B", "B"],
       ["B", "B", "B", "B", "B"],
       [" ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " "],
     ];
     this.letters = [
-      ["R", "O", "A", "T", "E"],
-      ["B", "A", "L", "M", "S"],
+      ["r", "o", "a", "t", "e"],
+      ["s", "l", "i", "m", "y"],
       [" ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " "],
     ];
-    this.current_row = 1;
+    this.current_row = 0;
     this.setWordleGame = (_)=>{};
     this.lastChangeTimestamp = 0;
   }
