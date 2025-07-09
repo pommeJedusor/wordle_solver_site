@@ -46,7 +46,7 @@ function EmptySquare({letter, onClick}: {letter: string, onClick: any}){
 export function Square({wordleGame, row, color, letter}: {wordleGame: WordleGame, row: number, color: string, letter: string}){
   function updateRow(){
     if (!["G", "Y", "B"].includes(color))return;
-    wordleGame.current_row = row;
+    wordleGame.changeCurrentRow(row);
     wordleGame.setWordleGame([wordleGame]);
   }
 

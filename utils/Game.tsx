@@ -25,9 +25,18 @@ export class WordleGame{
     this.lastChangeTimestamp = 0;
   }
 
+  changeCurrentRow(row: number){
+    this.current_row = row;
+    this.getNextGuess(row + 1);
+  }
+
   changeColor(row: number, col: number, color: string){
     this.colors[row][col] = color;
     this.setWordleGame([this]);
+    this.getNextGuess(row + 1);
+  }
+
+  getNextGuess(row: number){
     const current_timestamp = Date.now();
     const body = this.getBody();
     (async () => {
@@ -45,16 +54,16 @@ export class WordleGame{
 
       const word = await rawResponse.text();
       if (!word){
-        this.letters[row + 1] = [" ", " ", " ", " ", " "];
-        this.colors[row + 1] = [" ", " ", " ", " ", " "];
+        this.letters[row] = [" ", " ", " ", " ", " "];
+        this.colors[row] = [" ", " ", " ", " ", " "];
         this.setWordleGame([this]);
       }
       else{
-        this.letters[row + 1] = word.split("");
-        this.colors[row + 1] = ["B", "B", "B", "B", "B"];
+        this.letters[row] = word.split("");
+        this.colors[row] = ["B", "B", "B", "B", "B"];
         this.setWordleGame([this]);
       }
-      for (let i = row + 2;i<this.letters.length;i++){
+      for (let i = row + 1;i<this.letters.length;i++){
         this.letters[i] = [" ", " ", " ", " ", " "];
         this.colors[i] = [" ", " ", " ", " ", " "];
       }
