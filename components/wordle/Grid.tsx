@@ -7,7 +7,7 @@ import { WordleGame } from "@/utils/Game";
 
 function create_squares(wordle_game: WordleGame[]){
   const wordleGame = wordle_game[0]
-  let squares = [];
+  const squares = [];
   for(let i=0;i<wordleGame.colors.length;i++){
     for(let j=0;i==wordleGame.current_row && j<wordleGame.colors[i].length;j++){
       const previous_color = get_previous_color(wordleGame.colors[i][j]);

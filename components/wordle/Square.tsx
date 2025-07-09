@@ -2,7 +2,7 @@
 
 import { WordleGame } from "@/utils/Game"
 
-function GreenSquare({letter, onClick}: {letter: string, onClick: any}){
+function GreenSquare({letter, onClick}: {letter: string, onClick: ()=>void}){
   return (
     <>
       <div onClick={onClick} className={`grid row-span-2 col-span-2 w-full h-full bg-well-placed-letter-day dark:bg-well-placed-letter-night`}>
@@ -12,7 +12,7 @@ function GreenSquare({letter, onClick}: {letter: string, onClick: any}){
   )
 }
 
-function YellowSquare({letter, onClick}: {letter: string, onClick: any}){
+function YellowSquare({letter, onClick}: {letter: string, onClick: ()=>void}){
   return (
     <>
       <div onClick={onClick} className={`grid row-span-2 col-span-2 w-full h-full bg-valid-letter-day dark:bg-valid-letter-night`}>
@@ -22,7 +22,7 @@ function YellowSquare({letter, onClick}: {letter: string, onClick: any}){
   )
 }
 
-function BlackSquare({letter, onClick}: {letter: string, onClick: any}){
+function BlackSquare({letter, onClick}: {letter: string, onClick: ()=>void}){
   return (
     <>
       <div onClick={onClick} className={`grid row-span-2 col-span-2 w-full h-full bg-unvalid-letter-day dark:bg-unvalid-letter-night`}>
@@ -32,7 +32,7 @@ function BlackSquare({letter, onClick}: {letter: string, onClick: any}){
   )
 }
 
-function EmptySquare({letter, onClick}: {letter: string, onClick: any}){
+function EmptySquare({letter, onClick}: {letter: string, onClick: ()=>void}){
   return (
     <>
       <div onClick={onClick} className={`grid row-span-2 col-span-2 w-full h-full bg-background-day border-2 border-square-border-day dark:bg-background-night dark:border-square-border-night`}>
