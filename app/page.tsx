@@ -8,7 +8,7 @@ export default function Home() {
   wordleGame[0].setWordleGame = setWordleGame
 
   return (
-    <div className="dark:bg-background-night bg-background-day h-dvh">
+    <div className="grid place-content-center dark:bg-background-night bg-background-day h-dvh">
       <Grid wordleGame={wordleGame}/>
     </div>
   );
