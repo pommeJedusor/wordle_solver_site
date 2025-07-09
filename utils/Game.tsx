@@ -40,7 +40,7 @@ export class WordleGame{
     const current_timestamp = Date.now();
     const body = this.getBody();
     (async () => {
-      const rawResponse = await fetch(`http://127.0.0.1:5000/get_next_attempt?words=${body}`, {
+      const rawResponse = await fetch(`https://api-wordle-solver.chesspomme.com/get_next_attempt?words=${body}`, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
