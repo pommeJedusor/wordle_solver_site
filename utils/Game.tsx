@@ -52,7 +52,13 @@ export class WordleGame{
       if (current_timestamp < this.lastChangeTimestamp)return;
       this.lastChangeTimestamp = current_timestamp 
 
-      const word = await rawResponse.text();
+      let word = await rawResponse.text();
+      let is_final_word = false;
+      if (word[5] == "Y"){
+        is_final_word = true;
+        word = word.slice(0, 5);
+      }
+
       if (!word){
         this.letters[row] = [" ", " ", " ", " ", " "];
         this.colors[row] = [" ", " ", " ", " ", " "];
@@ -62,6 +68,9 @@ export class WordleGame{
         this.letters[row] = word.split("");
         this.colors[row] = ["B", "B", "B", "B", "B"];
         this.setWordleGame([this]);
+      }
+      if (is_final_word){
+        this.colors[row] = ["G", "G", "G", "G", "G"];
       }
       for (let i = row + 1;i<this.letters.length;i++){
         this.letters[i] = [" ", " ", " ", " ", " "];
