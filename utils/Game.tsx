@@ -4,6 +4,8 @@ export class WordleGame{
   current_row: number;
   setWordleGame: (wordleGame: WordleGame[]) => void;
   lastChangeTimestamp: number;
+  isDailyWordleModeEnabled: Boolean;
+  todaysWord: string|undefined;
 
   constructor() {
     this.colors = [
@@ -23,6 +25,7 @@ export class WordleGame{
     this.current_row = 0;
     this.setWordleGame = (_)=>{};
     this.lastChangeTimestamp = 0;
+    this.isDailyWordleModeEnabled = false;
   }
 
   changeCurrentRow(row: number){
@@ -88,4 +91,73 @@ export class WordleGame{
     }
     return body.join("||");
   }
+
+  async colorSolution(): Promise<void>{
+    const date = new Date().toLocaleString('sv').split(" ")[0]
+    const solution = localStorage.getItem(`wordle-solver-${date}`)
+    if (!solution){
+      const interval_id = setInterval(()=>{
+        if (localStorage.get(`wordle-solver-${date}`)){
+          this.colorSolution();
+          clearInterval(interval_id);
+        }
+      }, 100)
+      return;
+    }
+    for (let i=0;i<this.colors.length && this.colors[i][0] != " ";i++){
+      const row_word = this.letters[i].join("");
+      const row_color = this.colors[i].join("");
+      const expected_colors = this.getColorsFromAttempt(solution, row_word);
+      if (row_color == expected_colors)continue;
+      this.colors[i] = expected_colors.split("");
+      this.changeCurrentRow(i)
+      break;
+    }
+    return;
+  }
+
+  getColorsFromAttempt(solution: string, attempt: string): string{
+    const well_placed_letters = get_well_placed_letters(solution, attempt)
+
+    const letter_number = new Map();
+    for (const letter of attempt){
+      let nb_letter_occurences_in_attempt = attempt.split("").filter((a) => a == letter).length;
+      let nb_letter_occurences_in_solution = solution.split("").filter((a) => a == letter).length;
+      if (nb_letter_occurences_in_attempt <= nb_letter_occurences_in_solution){
+        letter_number.set(letter, nb_letter_occurences_in_attempt);
+      }
+      else{
+        letter_number.set(letter, nb_letter_occurences_in_solution);
+      }
+    }
+
+    for (const letter of well_placed_letters.filter((a) => a)){
+      letter_number.set(letter, letter_number.get(letter) - 1);
+    }
+
+    const colors = []
+    for (let i=0;i<attempt.length;i++){
+      const l = attempt[i];
+      const well_placed_letter = well_placed_letters[i];
+      if (well_placed_letter){
+        colors.push("G")
+      }
+      else if (letter_number.get(l)){
+        letter_number.set(l, letter_number.get(l) - 1);
+        colors.push("Y")
+      }
+      else{
+        colors.push("B")
+      }
+    }
+    return colors.join("")
+  }
+}
+function get_well_placed_letters(solution: string, attempt: string): Array<string | Boolean>{
+  let result = [];
+  for (let i=0;i<solution.length;i++){
+    if (solution[i] == attempt[i])result.push(solution[i]);
+    else result.push(false)
+  }
+    return result
 }
