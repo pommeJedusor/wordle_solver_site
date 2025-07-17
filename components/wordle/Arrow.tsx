@@ -39,7 +39,7 @@ export function Arrow({wordleGame, must_rotate, color, row, col}: {wordleGame: W
   }
 
   return (
-    <svg onClick={()=>{wordleGame.changeColor(row, col, color)}} className="hover:opacity-75 row-span-1 col-span-2 w-full h-full" width="11" height="7" viewBox="0 0 22 14" transform={`rotate(${rotation} 0 0)`} xmlns="http://www.w3.org/2000/svg">
+    <svg onClick={()=>{wordleGame.changeColor(row, col, color)}} className="cursor-pointer hover:opacity-75 row-span-1 col-span-2 w-full h-full" width="11" height="7" viewBox="0 0 22 14" transform={`rotate(${rotation} 0 0)`} xmlns="http://www.w3.org/2000/svg">
       <g id="arrow">
         <ArrowComponent />
       </g>

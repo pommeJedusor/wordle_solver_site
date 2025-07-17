@@ -30,10 +30,10 @@ export default function Home() {
   return (
       <div className="grid gap-10 place-content-center dark:bg-background-night bg-background-day h-dvh">
         <div className="flex flex-row justify-center">
-          <button onClick={toggleDailyWordleMode} type="button" title="change color according to today's word on wordle" className="mx-2 focus:outline-none hover:outline-none focus:ring-4 hover:ring-4 focus:ring-yellow-700 dark:focus:ring-yellow-800 hover:ring-yellow-600 dark:hover:ring-yellow-700 bg-yellow-500 dark:bg-yellow-600 hover:bg-yellow-400 dark:hover:bg-yellow-500 p-1 rounded" >
+          <button onClick={toggleDailyWordleMode} type="button" title="change color according to today's word on wordle" className="cursor-pointer mx-2 focus:outline-none hover:outline-none focus:ring-4 hover:ring-4 focus:ring-yellow-700 dark:focus:ring-yellow-800 hover:ring-yellow-600 dark:hover:ring-yellow-700 bg-yellow-500 dark:bg-yellow-600 hover:bg-yellow-400 dark:hover:bg-yellow-500 p-1 rounded" >
             <Image className="w-12 h-12 mx-auto" width={500} height={500} src="/star.svg" alt="toggle cheat" />
           </button>
-          <button onClick={resetGame} type="button" title="refresh" className="mx-2 focus:outline-none hover:outline-none focus:ring-4 hover:ring-4 focus:ring-sky-700 dark:focus:ring-sky-800 hover:ring-sky-600 dark:hover:ring-sky-700 bg-sky-500 dark:bg-sky-600 hover:bg-sky-400 dark:hover:bg-sky-500 p-1 rounded" >
+          <button onClick={resetGame} type="button" title="refresh" className="cursor-pointer mx-2 focus:outline-none hover:outline-none focus:ring-4 hover:ring-4 focus:ring-sky-700 dark:focus:ring-sky-800 hover:ring-sky-600 dark:hover:ring-sky-700 bg-sky-500 dark:bg-sky-600 hover:bg-sky-400 dark:hover:bg-sky-500 p-1 rounded" >
             <Image className="w-12 h-12 mx-auto rotate-270" width={500} height={500} src="/refresh.svg" alt="refresh" />
           </button>
         </div>
