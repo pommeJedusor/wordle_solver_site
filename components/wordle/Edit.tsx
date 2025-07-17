@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRef } from "react";
 
 export function Edit({wordleGame}: {wordleGame: WordleGame}){
-  const buttonRef = useRef<null>(null)
+  const buttonRef = useRef<HTMLButtonElement | null>(null)
 
   function toggleEditMode(){
     buttonRef.current?.blur();
