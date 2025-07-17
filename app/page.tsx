@@ -16,6 +16,10 @@ async function getTodaysWord(){
 export default function Home() {
   useEffect(()=>{
     getTodaysWord();
+
+    const func = (event: KeyboardEvent) => {if (wordleGame[0].isEditModeEnabled)wordleGame[0].keyPressEventListener(event)};
+    addEventListener("keydown", func);
+    return () => removeEventListener("keydown", func);
   })
   const [wordleGame, setWordleGame] = useState([new WordleGame()])
   wordleGame[0].setWordleGame = setWordleGame

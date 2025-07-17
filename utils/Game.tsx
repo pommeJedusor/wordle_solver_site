@@ -1,11 +1,12 @@
 export class WordleGame{
   colors: Array<Array<string>>;
   letters: Array<Array<string>>;
-  current_row: number;
-  setWordleGame: (wordleGame: WordleGame[]) => void;
-  lastChangeTimestamp: number;
-  isDailyWordleModeEnabled: Boolean;
-  todaysWord: string|undefined;
+  current_row: number = 0;
+  setWordleGame: (wordleGame: WordleGame[]) => void =  (_)=>{};
+  lastChangeTimestamp: number = 0;
+  isEditModeEnabled: Boolean = false;
+  EditModeWord: Array<string>;
+  EditModeWordColor: Array<string>;
 
   constructor() {
     this.colors = [
@@ -24,13 +25,12 @@ export class WordleGame{
       [" ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " "],
     ];
-    this.current_row = 0;
-    this.setWordleGame = (_)=>{};
-    this.lastChangeTimestamp = 0;
-    this.isDailyWordleModeEnabled = false;
+    this.EditModeWord = []
+    this.EditModeWordColor = []
   }
 
   changeCurrentRow(row: number){
+    this.endEdit();
     this.current_row = row;
     this.getNextGuess(row + 1);
   }
@@ -153,6 +153,41 @@ export class WordleGame{
       }
     }
     return colors.join("")
+  }
+
+  endEdit(){
+    this.isEditModeEnabled = false;
+    if (this.EditModeWord.length == 5){
+      this.letters[this.current_row] = this.EditModeWord;
+      this.colors[this.current_row] = ["B", "B", "B", "B", "B"];
+      this.getNextGuess(this.current_row + 1);
+    }
+    this.EditModeWord = [];
+    this.EditModeWordColor = [];
+  }
+
+  keyPressEventListener(event: KeyboardEvent){
+    const key = event.key;
+    if (key == "Backspace"){
+      console.log(this.EditModeWordColor);
+      this.EditModeWordColor.pop();
+      this.EditModeWord.pop();
+    }
+    else if (key == "Escape"){
+      this.isEditModeEnabled = false;
+      this.EditModeWord = [];
+      this.EditModeWordColor = [];
+    }
+    else if (key == "Enter" && this.EditModeWord.length == 5){
+      console.log(this.EditModeWord)
+      this.endEdit();
+    }
+    else if (this.EditModeWord.length < 5 && /^[a-zA-Z]$/.test(key)){
+      this.EditModeWordColor.push("W");
+      this.EditModeWord.push(key.toLowerCase());
+    }
+    console.log(event.key);
+    this.setWordleGame([this]);
   }
 }
 function get_well_placed_letters(solution: string, attempt: string): Array<string | Boolean>{
