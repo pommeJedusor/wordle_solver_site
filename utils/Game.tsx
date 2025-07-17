@@ -106,15 +106,13 @@ export class WordleGame{
       }, 100)
       return;
     }
-    for (let i=0;i<this.colors.length && this.colors[i][0] != " ";i++){
+    for (let i=0;i<=this.current_row;i++){
       const row_word = this.letters[i].join("");
-      const row_color = this.colors[i].join("");
       const expected_colors = this.getColorsFromAttempt(solution, row_word);
-      if (row_color == expected_colors)continue;
       this.colors[i] = expected_colors.split("");
-      this.changeCurrentRow(i)
-      break;
     }
+    this.setWordleGame([this]);
+    this.getNextGuess(this.current_row + 1);
     return;
   }
 
@@ -190,6 +188,7 @@ export class WordleGame{
     this.setWordleGame([this]);
   }
 }
+
 function get_well_placed_letters(solution: string, attempt: string): Array<string | Boolean>{
   let result = [];
   for (let i=0;i<solution.length;i++){
