@@ -6,7 +6,7 @@ function GreenSquare({letter, onClick}: {letter: string, onClick: ()=>void}){
   return (
     <>
       <div onClick={onClick} className={`grid row-span-2 col-span-2 w-full h-full bg-well-placed-letter-day dark:bg-well-placed-letter-night`}>
-        <p className="text-4xl select-none font-[1000] text-white place-self-center cursor-default">{letter}</p>
+        <p className="select-none font-[1000] text-white place-self-center cursor-default">{letter}</p>
       </div>
     </>
   )
@@ -16,7 +16,7 @@ function YellowSquare({letter, onClick}: {letter: string, onClick: ()=>void}){
   return (
     <>
       <div onClick={onClick} className={`grid row-span-2 col-span-2 w-full h-full bg-valid-letter-day dark:bg-valid-letter-night`}>
-        <p className="text-4xl select-none font-[1000] text-white place-self-center cursor-default">{letter}</p>
+        <p className="select-none font-[1000] text-white place-self-center cursor-default">{letter}</p>
       </div>
     </>
   )
@@ -26,7 +26,7 @@ function BlackSquare({letter, onClick}: {letter: string, onClick: ()=>void}){
   return (
     <>
       <div onClick={onClick} className={`grid row-span-2 col-span-2 w-full h-full bg-unvalid-letter-day dark:bg-unvalid-letter-night`}>
-        <p className="text-4xl select-none font-[1000] text-white place-self-center cursor-default">{letter}</p>
+        <p className="select-none font-[1000] text-white place-self-center cursor-default">{letter}</p>
       </div>
     </>
   )
@@ -36,7 +36,7 @@ function EmptySquare({letter, onClick}: {letter: string, onClick: ()=>void}){
   return (
     <>
       <div onClick={onClick} className={`grid row-span-2 col-span-2 w-full h-full bg-background-day border-2 border-square-border-day dark:bg-background-night dark:border-square-border-night`}>
-        <p className="text-4xl font-[1000] text-white place-self-center cursor-default">{letter}</p>
+        <p className="font-[1000] text-white place-self-center cursor-default">{letter}</p>
       </div>
     </>
   )
@@ -46,7 +46,7 @@ function WhiteSquare({letter, onClick}: {letter: string, onClick: ()=>void}){
   return (
     <>
       <div onClick={onClick} className={`grid row-span-2 col-span-2 w-full h-full bg-background-day border-2 border-black-700 dark:bg-background-night dark:border-gray-500 `}>
-        <p className="text-4xl font-[1000] text-black dark:text-white place-self-center cursor-default">{letter}</p>
+        <p className="font-[1000] text-black dark:text-white place-self-center cursor-default">{letter}</p>
       </div>
     </>
   )
