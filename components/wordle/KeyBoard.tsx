@@ -9,34 +9,45 @@ enum Color {
   WronglyPlaced,
 }
 
-
-function DefaultLetterKey({letter}: {letter: string}){
+function DefaultLetterKey({letter, wordleGame}: {letter: string, wordleGame: WordleGame}){
+  function onClick(){
+    wordleGame.keyPressEventListener(letter);
+  }
   return (
-    <div className="grid h-full basis-2/23 bg-square-border-day dark:bg-square-border-night text-black dark:text-white rounded-md cursor-pointer">
+    <div onClick={onClick} className="grid h-full basis-2/23 bg-square-border-day dark:bg-square-border-night text-black dark:text-white rounded-md cursor-pointer">
       <p className="select-none font-[1000] place-self-center">{letter}</p>
     </div>
   )
 }
 
-function WellPlacedLetterKey({letter}: {letter: string}){
+function WellPlacedLetterKey({letter, wordleGame}: {letter: string, wordleGame: WordleGame}){
+  function onClick(){
+    wordleGame.keyPressEventListener(letter);
+  }
   return (
-    <div className="grid h-full basis-2/23 bg-well-placed-letter-day dark:bg-well-placed-letter-night text-white rounded-md cursor-pointer">
+    <div onClick={onClick} className="grid h-full basis-2/23 bg-well-placed-letter-day dark:bg-well-placed-letter-night text-white rounded-md cursor-pointer">
       <p className="select-none font-[1000] place-self-center">{letter}</p>
     </div>
   )
 }
 
-function WronglyPlacedLetterKey({letter}: {letter: string}){
+function WronglyPlacedLetterKey({letter, wordleGame}: {letter: string, wordleGame: WordleGame}){
+  function onClick(){
+    wordleGame.keyPressEventListener(letter);
+  }
   return (
-    <div className="grid h-full basis-2/23 bg-valid-letter-day dark:bg-valid-letter-night text-white rounded-md cursor-pointer">
+    <div onClick={onClick} className="grid h-full basis-2/23 bg-valid-letter-day dark:bg-valid-letter-night text-white rounded-md cursor-pointer">
       <p className="select-none font-[1000] place-self-center">{letter}</p>
     </div>
   )
 }
 
-function NotInWordLetterKey({letter}: {letter: string}){
+function NotInWordLetterKey({letter, wordleGame}: {letter: string, wordleGame: WordleGame}){
+  function onClick(){
+    wordleGame.keyPressEventListener(letter);
+  }
   return (
-    <div className="grid h-full basis-2/23 bg-unvalid-letter-day dark:bg-unvalid-letter-night text-white rounded-md cursor-pointer">
+    <div onClick={onClick} className="grid h-full basis-2/23 bg-unvalid-letter-day dark:bg-unvalid-letter-night text-white rounded-md cursor-pointer">
       <p className="select-none font-[1000] place-self-center">{letter}</p>
     </div>
   )
@@ -47,10 +58,10 @@ export function KeyBoard({wordleGame}: {wordleGame: WordleGame[]}){
     const result = [];
     for (const letter of letters){
       const letter_color = getColorOfLetter(letter, wordleGame[0]);
-      if (letter_color == Color.WellPlaced)result.push(<WellPlacedLetterKey letter={letter} key={letter}/>);
-      else if (letter_color == Color.WronglyPlaced)result.push(<WronglyPlacedLetterKey letter={letter} key={letter}/>);
-      else if (letter_color == Color.NotInWord)result.push(<NotInWordLetterKey letter={letter} key={letter}/>);
-      else result.push(<DefaultLetterKey letter={letter} key={letter}/>);
+      if (letter_color == Color.WellPlaced)result.push(<WellPlacedLetterKey letter={letter} wordleGame={wordleGame[0]} key={letter}/>);
+      else if (letter_color == Color.WronglyPlaced)result.push(<WronglyPlacedLetterKey letter={letter} wordleGame={wordleGame[0]} key={letter}/>);
+      else if (letter_color == Color.NotInWord)result.push(<NotInWordLetterKey letter={letter} wordleGame={wordleGame[0]} key={letter}/>);
+      else result.push(<DefaultLetterKey letter={letter} wordleGame={wordleGame[0]} key={letter}/>);
     }
     return result;
   }
