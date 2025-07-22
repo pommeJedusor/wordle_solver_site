@@ -167,7 +167,6 @@ export class WordleGame{
   keyPressEventListener(event: KeyboardEvent){
     const key = event.key;
     if (key == "Backspace"){
-      console.log(this.EditModeWordColor);
       this.EditModeWordColor.pop();
       this.EditModeWord.pop();
     }
@@ -177,14 +176,12 @@ export class WordleGame{
       this.EditModeWordColor = [];
     }
     else if (key == "Enter" && this.EditModeWord.length == 5){
-      console.log(this.EditModeWord)
       this.endEdit();
     }
     else if (this.EditModeWord.length < 5 && /^[a-zA-Z]$/.test(key)){
       this.EditModeWordColor.push("W");
       this.EditModeWord.push(key.toLowerCase());
     }
-    console.log(event.key);
     this.setWordleGame([this]);
   }
 }
