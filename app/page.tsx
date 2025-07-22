@@ -43,7 +43,7 @@ export default function Home() {
           </button>
         </div>
         <Grid wordleGame={wordleGame}/>
-        <KeyBoard/>
+        <KeyBoard wordleGame={wordleGame}/>
     </div>
   );
 }
