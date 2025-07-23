@@ -43,7 +43,7 @@ export default function Home() {
           </button>
         </div>
         <Grid wordleGame={wordleGame}/>
-        <KeyBoard wordleGame={wordleGame}/>
+        { wordleGame[0].isEditModeEnabled ? <KeyBoard wordleGame={wordleGame}/> : null}
     </div>
   );
 }
