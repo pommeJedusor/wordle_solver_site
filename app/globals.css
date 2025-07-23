@@ -17,6 +17,8 @@
   --color-unvalid-letter-night: #3A3A3C;
   --color-background-night: #121213;
   --color-square-border-night: #3A3A3C;
+
+  --breakpoint-xs: 25rem;
 }
 
 @theme inline {

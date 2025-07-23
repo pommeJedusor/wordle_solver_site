@@ -164,8 +164,7 @@ export class WordleGame{
     this.EditModeWordColor = [];
   }
 
-  keyPressEventListener(event: KeyboardEvent){
-    const key = event.key;
+  keyPressEventListener(key: string){
     if (key == "Backspace"){
       this.EditModeWordColor.pop();
       this.EditModeWord.pop();

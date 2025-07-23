@@ -55,7 +55,7 @@ function create_squares(wordle_game: WordleGame[]){
 
 export function Grid({wordleGame}: {wordleGame: WordleGame[]}) {
   return (
-    <div className="uppercase md:text-5xl sm:text-4xl text-2xl grid grid-rows-14 grid-cols-14 gap-2 h-90 sm:h-145 md:h-180 w-90 sm:w-145 md:w-180 dark:bg-background-night bg-background-day">
+    <div className="uppercase text-2xl sm:text-2xl md:text-3xl grid grid-rows-14 grid-cols-14 gap-2 h-90 sm:h-105 md:h-120 w-90 sm:w-105 md:w-120 dark:bg-background-night bg-background-day">
       {create_squares(wordleGame)}
     </div>
   );
