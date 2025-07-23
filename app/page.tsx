@@ -42,7 +42,7 @@ export default function Home() {
             <Image className="md:w-12 sm:w-9 w-6 md:h-12 sm:h-9 h-6 mx-auto rotate-270" width={500} height={500} src="/refresh.svg" alt="refresh" />
           </button>
         </div>
-        <Grid wordleGame={wordleGame}/>
+        <Grid wordleGame={wordleGame} isGameMode={false}/>
         { wordleGame[0].isEditModeEnabled ? <KeyBoard wordleGame={wordleGame}/> : null}
     </div>
   );

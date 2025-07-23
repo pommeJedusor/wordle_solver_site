@@ -7,6 +7,8 @@ export class WordleGame{
   isEditModeEnabled: Boolean = false;
   EditModeWord: Array<string>;
   EditModeWordColor: Array<string>;
+  isGameModeEnabled: Boolean;
+  gameModeSolution: string|undefined;
 
   constructor() {
     this.colors = [
@@ -27,6 +29,7 @@ export class WordleGame{
     ];
     this.EditModeWord = []
     this.EditModeWordColor = []
+    this.isGameModeEnabled = false;
   }
 
   changeCurrentRow(row: number){
@@ -164,7 +167,35 @@ export class WordleGame{
     this.EditModeWordColor = [];
   }
 
+  gameModekeyPressEventListener(key: string){
+    if (this.current_row == this.letters.length)return;
+    if (key == "Backspace"){
+      let last_letter_index = -1;
+      for (let i=0;i<this.letters[0].length;i++)if (this.letters[this.current_row][i] != " ")last_letter_index = i;
+      if (last_letter_index != -1){
+        this.letters[this.current_row][last_letter_index] = " ";
+        this.colors[this.current_row][last_letter_index] = " ";
+      }
+    }
+    else if (key == "Enter" && this.letters[this.current_row][this.letters[0].length - 1] != " "){
+      const colors = this.getColorsFromAttempt(this.gameModeSolution as string, this.letters[this.current_row].join(""));
+      this.colors[this.current_row] = colors.split("");
+      this.current_row += 1;
+      if (colors == "GGGGG"){
+        this.current_row = this.letters.length
+      }
+    }
+    else if (this.letters[this.current_row][this.letters[0].length - 1] == " " && /^[a-zA-Z]$/.test(key)){
+      let last_letter_index = -1;
+      for (let i=0;i<this.letters[0].length;i++)if (this.letters[this.current_row][i] != " ")last_letter_index = i;
+      this.letters[this.current_row][last_letter_index + 1] = key.toLowerCase();
+      this.colors[this.current_row][last_letter_index + 1] = "W";
+    }
+    this.setWordleGame([this]);
+  }
+
   keyPressEventListener(key: string){
+    if (this.isGameModeEnabled)return this.gameModekeyPressEventListener(key);
     if (key == "Backspace"){
       this.EditModeWordColor.pop();
       this.EditModeWord.pop();
@@ -182,6 +213,32 @@ export class WordleGame{
       this.EditModeWord.push(key.toLowerCase());
     }
     this.setWordleGame([this]);
+  }
+
+  enableGameMode(){
+    if (this.isGameModeEnabled)return;
+    this.gameModeSolution = this.getRandomSolution();
+    this.isGameModeEnabled = true;
+    this.colors = [
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+    ];
+    this.letters = [
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+    ];
+  }
+
+  getRandomSolution(){
+    return "pomme"
   }
 }
 
