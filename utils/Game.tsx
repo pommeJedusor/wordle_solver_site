@@ -217,7 +217,7 @@ export class WordleGame{
 
   enableGameMode(){
     if (this.isGameModeEnabled)return;
-    this.gameModeSolution = this.getRandomSolution();
+    this.getRandomSolution();
     this.isGameModeEnabled = true;
     this.colors = [
       [" ", " ", " ", " ", " "],
@@ -237,8 +237,11 @@ export class WordleGame{
     ];
   }
 
-  getRandomSolution(){
-    return "pomme"
+  async getRandomSolution(){
+    const solution_id = Math.floor(Math.random() * 2309);
+    const url = `https://api-wordle-solver.chesspomme.com/get_solution/${solution_id}`;
+    const solution = await (await fetch(url)).text();
+    this.gameModeSolution = solution
   }
 }
 
