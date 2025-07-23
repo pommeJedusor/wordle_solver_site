@@ -26,7 +26,7 @@ function EnterKey({wordleGame}: {wordleGame: WordleGame}){
   }
   return (
     <div onClick={onClick} className="grid h-full basis-3/23 bg-square-border-day dark:bg-square-border-night text-black dark:text-white rounded-md cursor-pointer">
-      <p className="select-none text-sm font-[1000] place-self-center">enter</p>
+      <p className="select-none sm:text-sm font-[1000] place-self-center">enter</p>
     </div>
   )
 }
@@ -89,14 +89,14 @@ export function KeyBoard({wordleGame}: {wordleGame: WordleGame[]}){
   }
 
   return (
-    <div className="text-1xl sm:text-1xl md:text-2xl grid grid-flow-col grid-rows-3 gap-2 uppercase w-90 sm:w-122 md:w-140 h-60 sm:h-50 md:h-60">
-      <div className="flex justify-center gap-2">
+    <div className="text-base sm:text-[22px] md:text-2xl grid grid-flow-col grid-rows-3 gap-[2px] xs:gap-1 sm:gap-2 uppercase w-97 xs:w-97 sm:w-122 md:w-140 h-40 sm:h-50 md:h-60">
+      <div className="flex justify-center gap-[2px] xs:gap-1 sm:gap-2">
         {generateLetterKeys("qwertyuiop")}
       </div>
-      <div className="flex justify-center gap-2">
+      <div className="flex justify-center gap-[2px] xs:gap-1 sm:gap-2">
         {generateLetterKeys("asdfghjkl")}
       </div>
-      <div className="flex justify-center gap-2">
+      <div className="flex justify-center gap-[2px] xs:gap-1 sm:gap-2">
         <EnterKey wordleGame={wordleGame[0]}/>
         {generateLetterKeys("zxcvbnm")}
         <DeleteKey wordleGame={wordleGame[0]}/>
