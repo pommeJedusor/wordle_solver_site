@@ -1,3 +1,5 @@
+import { USABLE_WORDS } from "./usable_words";
+
 export class WordleGame{
   colors: Array<Array<string>>;
   letters: Array<Array<string>>;
@@ -176,13 +178,23 @@ export class WordleGame{
         this.letters[this.current_row][last_letter_index] = " ";
         this.colors[this.current_row][last_letter_index] = " ";
       }
+      this.setWordleGame([this]);
     }
     else if (key == "Enter" && this.letters[this.current_row][this.letters[0].length - 1] != " "){
-      const colors = this.getColorsFromAttempt(this.gameModeSolution as string, this.letters[this.current_row].join(""));
-      this.colors[this.current_row] = colors.split("");
-      this.current_row += 1;
-      if (colors == "GGGGG"){
-        this.current_row = this.letters.length
+      const word = this.letters[this.current_row].join("");
+      const is_word_usable = USABLE_WORDS.has(word)
+      console.log(this.gameModeSolution)
+
+      if (!is_word_usable){
+        // TODO
+      }else {
+        const colors = this.getColorsFromAttempt(this.gameModeSolution as string, word);
+        this.colors[this.current_row] = colors.split("");
+        this.current_row += 1;
+        if (colors == "GGGGG"){
+          this.current_row = this.letters.length
+        }
+        this.setWordleGame([this]);
       }
     }
     else if (this.letters[this.current_row][this.letters[0].length - 1] == " " && /^[a-zA-Z]$/.test(key)){
@@ -190,8 +202,8 @@ export class WordleGame{
       for (let i=0;i<this.letters[0].length;i++)if (this.letters[this.current_row][i] != " ")last_letter_index = i;
       this.letters[this.current_row][last_letter_index + 1] = key.toLowerCase();
       this.colors[this.current_row][last_letter_index + 1] = "W";
+      this.setWordleGame([this]);
     }
-    this.setWordleGame([this]);
   }
 
   keyPressEventListener(key: string){

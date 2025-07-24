@@ -2,8 +2,10 @@
 import { Grid } from "@/components/wordle/Grid";
 import { KeyBoard } from "@/components/wordle/KeyBoard";
 import { WordleGame } from "@/utils/Game";
+import { USABLE_WORDS } from "@/utils/usable_words";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+
 
 export default function Home() {
   useEffect(()=>{
