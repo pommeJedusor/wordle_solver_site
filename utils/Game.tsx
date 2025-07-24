@@ -192,7 +192,6 @@ export class WordleGame{
     else if (key == "Enter" && this.letters[this.current_row][this.letters[0].length - 1] != " "){
       const word = this.letters[this.current_row].join("");
       const is_word_usable = USABLE_WORDS.has(word)
-      console.log(this.gameModeSolution)
 
       if (!is_word_usable){
         this.gameModeShake();

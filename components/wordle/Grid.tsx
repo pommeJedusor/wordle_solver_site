@@ -57,7 +57,6 @@ function create_squares(wordle_game: WordleGame[]){
 export function Grid({wordleGame}: {wordleGame: WordleGame[]}) {
   useEffect(() => {
     wordleGame[0].gameModeShake = () => {
-      console.log("test2")
       wordleGame[0].gameModeShaking = true;
       wordleGame[0].setWordleGame([wordleGame[0]]);
       setTimeout(() => {
