@@ -1,9 +1,11 @@
 "use client";
+import './shaking-animation.css';
 import { Grid } from "@/components/wordle/Grid";
 import { KeyBoard } from "@/components/wordle/KeyBoard";
 import { GameState, WordleGame } from "@/utils/Game";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+
 
 
 export default function Home() {

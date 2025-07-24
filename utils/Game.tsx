@@ -18,6 +18,8 @@ export class WordleGame{
   isGameModeEnabled: Boolean;
   gameModeSolution: string|undefined;
   gameModeState: GameState|undefined;
+  gameModeShake: ()=>void = ()=>{};
+  gameModeShaking: Boolean = false;
 
   constructor() {
     this.colors = [
@@ -193,7 +195,7 @@ export class WordleGame{
       console.log(this.gameModeSolution)
 
       if (!is_word_usable){
-        // TODO
+        this.gameModeShake();
       }else {
         const colors = this.getColorsFromAttempt(this.gameModeSolution as string, word);
         this.colors[this.current_row] = colors.split("");
