@@ -28,6 +28,12 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@custom-variant gameMode {
+  &:where([is-game="true"] *) {
+    @slot;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;

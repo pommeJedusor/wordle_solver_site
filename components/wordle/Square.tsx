@@ -42,10 +42,10 @@ function EmptySquare({letter, onClick}: {letter: string, onClick: ()=>void}){
   )
 }
 
-function WhiteSquare({letter, onClick}: {letter: string, onClick: ()=>void}){
+function WhiteSquare({letter, onClick, wordleGame}: {letter: string, onClick: ()=>void, wordleGame: WordleGame}){
   return (
     <>
-      <div onClick={onClick} className={`grid row-span-2 col-span-2 w-full h-full bg-background-day border-2 border-black-700 dark:bg-background-night dark:border-gray-500 `}>
+      <div onClick={onClick} className={`${wordleGame.gameModeShaking ? 'shake' : ''} grid row-span-2 col-span-2 w-full h-full bg-background-day border-2 border-black-700 dark:bg-background-night dark:border-gray-500 `}>
         <p className="font-[1000] text-black dark:text-white place-self-center cursor-default">{letter}</p>
       </div>
     </>
@@ -70,7 +70,7 @@ export function Square({wordleGame, row, color, letter}: {wordleGame: WordleGame
     return<><BlackSquare onClick={updateRow} letter={letter}/></>;
   }
   else if (color == "W") {
-    return<><WhiteSquare onClick={updateRow} letter={letter}/></>;
+    return<><WhiteSquare onClick={updateRow} letter={letter} wordleGame={wordleGame}/></>;
   }
   else {
     return<><EmptySquare onClick={updateRow} letter={letter}/></>;

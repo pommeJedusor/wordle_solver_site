@@ -1,3 +1,11 @@
+import { USABLE_WORDS } from "./usable_words";
+
+export enum GameState {
+  Playing,
+  Won,
+  Lost,
+}
+
 export class WordleGame{
   colors: Array<Array<string>>;
   letters: Array<Array<string>>;
@@ -7,6 +15,11 @@ export class WordleGame{
   isEditModeEnabled: Boolean = false;
   EditModeWord: Array<string>;
   EditModeWordColor: Array<string>;
+  isGameModeEnabled: Boolean;
+  gameModeSolution: string|undefined;
+  gameModeState: GameState|undefined;
+  gameModeShake: ()=>void = ()=>{};
+  gameModeShaking: Boolean = false;
 
   constructor() {
     this.colors = [
@@ -27,6 +40,7 @@ export class WordleGame{
     ];
     this.EditModeWord = []
     this.EditModeWordColor = []
+    this.isGameModeEnabled = false;
   }
 
   changeCurrentRow(row: number){
@@ -164,7 +178,48 @@ export class WordleGame{
     this.EditModeWordColor = [];
   }
 
+  gameModekeyPressEventListener(key: string){
+    if (this.current_row == this.letters.length)return;
+    if (key == "Backspace"){
+      let last_letter_index = -1;
+      for (let i=0;i<this.letters[0].length;i++)if (this.letters[this.current_row][i] != " ")last_letter_index = i;
+      if (last_letter_index != -1){
+        this.letters[this.current_row][last_letter_index] = " ";
+        this.colors[this.current_row][last_letter_index] = " ";
+      }
+      this.setWordleGame([this]);
+    }
+    else if (key == "Enter" && this.letters[this.current_row][this.letters[0].length - 1] != " "){
+      const word = this.letters[this.current_row].join("");
+      const is_word_usable = USABLE_WORDS.has(word)
+
+      if (!is_word_usable){
+        this.gameModeShake();
+      }else {
+        const colors = this.getColorsFromAttempt(this.gameModeSolution as string, word);
+        this.colors[this.current_row] = colors.split("");
+        this.current_row += 1;
+        if (colors == "GGGGG"){
+          this.current_row = this.letters.length
+          this.gameModeState = GameState.Won;
+        }
+        this.setWordleGame([this]);
+      }
+    }
+    else if (this.letters[this.current_row][this.letters[0].length - 1] == " " && /^[a-zA-Z]$/.test(key)){
+      let last_letter_index = -1;
+      for (let i=0;i<this.letters[0].length;i++)if (this.letters[this.current_row][i] != " ")last_letter_index = i;
+      this.letters[this.current_row][last_letter_index + 1] = key.toLowerCase();
+      this.colors[this.current_row][last_letter_index + 1] = "W";
+      this.setWordleGame([this]);
+    }
+    if (this.current_row == this.letters.length && this.gameModeState == GameState.Playing){
+      this.gameModeState = GameState.Lost;
+    }
+  }
+
   keyPressEventListener(key: string){
+    if (this.isGameModeEnabled)return this.gameModekeyPressEventListener(key);
     if (key == "Backspace"){
       this.EditModeWordColor.pop();
       this.EditModeWord.pop();
@@ -182,6 +237,36 @@ export class WordleGame{
       this.EditModeWord.push(key.toLowerCase());
     }
     this.setWordleGame([this]);
+  }
+
+  enableGameMode(){
+    if (this.isGameModeEnabled)return;
+    this.getRandomSolution();
+    this.isGameModeEnabled = true;
+    this.gameModeState = GameState.Playing;
+    this.colors = [
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+    ];
+    this.letters = [
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+    ];
+  }
+
+  async getRandomSolution(){
+    const solution_id = Math.floor(Math.random() * 2309);
+    const url = `https://api-wordle-solver.chesspomme.com/get_solution/${solution_id}`;
+    const solution = await (await fetch(url)).text();
+    this.gameModeSolution = solution
   }
 }
 
