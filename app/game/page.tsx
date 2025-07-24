@@ -1,8 +1,7 @@
 "use client";
 import { Grid } from "@/components/wordle/Grid";
 import { KeyBoard } from "@/components/wordle/KeyBoard";
-import { WordleGame } from "@/utils/Game";
-import { USABLE_WORDS } from "@/utils/usable_words";
+import { GameState, WordleGame } from "@/utils/Game";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -13,9 +12,9 @@ export default function Home() {
     addEventListener("keydown", func);
     return () => removeEventListener("keydown", func);
   })
-  const [wordleGame, setWordleGame] = useState([new WordleGame()])
-  wordleGame[0].setWordleGame = setWordleGame
-  wordleGame[0].enableGameMode()
+  const [wordleGame, setWordleGame] = useState([new WordleGame()]);
+  wordleGame[0].setWordleGame = setWordleGame;
+  wordleGame[0].enableGameMode();
 
   function resetGame(){
     setWordleGame([new WordleGame()]);
@@ -29,7 +28,16 @@ export default function Home() {
           </button>
         </div>
         <Grid wordleGame={wordleGame}/>
-        <KeyBoard wordleGame={wordleGame}/>
+        { wordleGame[0].gameModeState == GameState.Playing ? <KeyBoard wordleGame={wordleGame}/> : null}
+        { wordleGame[0].gameModeState == GameState.Won ?
+          <p className="text-green-600 text-xl font-[1000]">YOU WON</p>
+          : null}
+        { wordleGame[0].gameModeState == GameState.Lost ?
+          <div>
+            <p className="text-center text-red-600 text-xl font-[1000]">YOU LOST</p>
+            <p className="text-center text-xl">the solution was <strong className="text-green-600 text-xl font-[1000]">{wordleGame[0].gameModeSolution}</strong></p>
+          </div>
+          : null}
     </div>
   );
 }

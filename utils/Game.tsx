@@ -1,5 +1,11 @@
 import { USABLE_WORDS } from "./usable_words";
 
+export enum GameState {
+  Playing,
+  Won,
+  Lost,
+}
+
 export class WordleGame{
   colors: Array<Array<string>>;
   letters: Array<Array<string>>;
@@ -11,6 +17,7 @@ export class WordleGame{
   EditModeWordColor: Array<string>;
   isGameModeEnabled: Boolean;
   gameModeSolution: string|undefined;
+  gameModeState: GameState|undefined;
 
   constructor() {
     this.colors = [
@@ -193,6 +200,7 @@ export class WordleGame{
         this.current_row += 1;
         if (colors == "GGGGG"){
           this.current_row = this.letters.length
+          this.gameModeState = GameState.Won;
         }
         this.setWordleGame([this]);
       }
@@ -203,6 +211,9 @@ export class WordleGame{
       this.letters[this.current_row][last_letter_index + 1] = key.toLowerCase();
       this.colors[this.current_row][last_letter_index + 1] = "W";
       this.setWordleGame([this]);
+    }
+    if (this.current_row == this.letters.length && this.gameModeState == GameState.Playing){
+      this.gameModeState = GameState.Lost;
     }
   }
 
@@ -231,6 +242,7 @@ export class WordleGame{
     if (this.isGameModeEnabled)return;
     this.getRandomSolution();
     this.isGameModeEnabled = true;
+    this.gameModeState = GameState.Playing;
     this.colors = [
       [" ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " "],
