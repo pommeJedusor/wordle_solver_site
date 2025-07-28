@@ -28,7 +28,11 @@ export default function Home() {
   useEffect(()=>{
     getTodaysWord();
 
-    const func = (event: KeyboardEvent) => {if (wordleGame[0].isEditModeEnabled)wordleGame[0].keyPressEventListener(event.key)};
+    const func = (event: KeyboardEvent) => {
+      if (wordleGame[0].isEditModeEnabled && !event.ctrlKey){
+        wordleGame[0].keyPressEventListener(event.key);
+      }
+    };
     addEventListener("keydown", func);
     return () => removeEventListener("keydown", func);
   })

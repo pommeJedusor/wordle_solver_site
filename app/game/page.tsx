@@ -16,7 +16,11 @@ export default function Home() {
   }
 
   useEffect(()=>{
-    const func = (event: KeyboardEvent) => {wordleGame[0].keyPressEventListener(event.key)};
+    const func = (event: KeyboardEvent) => {
+      if (!event.ctrlKey){
+        wordleGame[0].keyPressEventListener(event.key);
+      }
+    };
     addEventListener("keydown", func);
     return () => removeEventListener("keydown", func);
   })
