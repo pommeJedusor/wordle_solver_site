@@ -14,7 +14,7 @@ function DeleteKey({wordleGame}: {wordleGame: WordleGame}){
     wordleGame.keyPressEventListener("Backspace");
   }
   return (
-    <div onClick={onClick} className="grid h-full basis-3/23 bg-square-border-day dark:bg-square-border-night text-black dark:text-white rounded-md cursor-pointer">
+    <div onClick={onClick} className="grid h-full basis-3/23 bg-default-key-day dark:bg-default-key-night text-black dark:text-white rounded-md cursor-pointer">
       <svg className="place-self-center h-1/2 w-1/2 fill-black dark:fill-white" viewBox="0 0 256 256" id="Flat" xmlns="http://www.w3.org/2000/svg" stroke="#000000"><g id="SVGRepo_bgCarrier" strokeWidth="0"/><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"/><g id="SVGRepo_iconCarrier"> <path d="M216,43.99963H68.5293a12.05811,12.05811,0,0,0-10.28907,5.82715L12.57031,125.942a3.99551,3.99551,0,0,0,0,4.11523l45.669,76.11621a12.05879,12.05879,0,0,0,10.29,5.82617H216a12.01312,12.01312,0,0,0,12-12v-144A12.01312,12.01312,0,0,0,216,43.99963Zm4,156a4.004,4.004,0,0,1-4,4H68.5293a4.017,4.017,0,0,1-3.42871-1.9414h-.001L20.665,127.99963,65.10059,53.942a4.017,4.017,0,0,1,3.42871-1.94239H216a4.004,4.004,0,0,1,4,4Zm-57.17188-93.17187-21.17187,21.17187,21.17187,21.17188a3.99957,3.99957,0,1,1-5.65625,5.65625L136,133.65588l-21.17188,21.17188a3.99957,3.99957,0,0,1-5.65625-5.65625l21.17188-21.17188-21.17188-21.17187a3.99957,3.99957,0,0,1,5.65625-5.65625L136,122.34338l21.17187-21.17187a3.99957,3.99957,0,0,1,5.65625,5.65625Z"/> </g></svg>
     </div>
   )
@@ -25,7 +25,7 @@ function EnterKey({wordleGame}: {wordleGame: WordleGame}){
     wordleGame.keyPressEventListener("Enter");
   }
   return (
-    <div onClick={onClick} className="grid h-full basis-3/23 bg-square-border-day dark:bg-square-border-night text-black dark:text-white rounded-md cursor-pointer">
+    <div onClick={onClick} className="grid h-full basis-3/23 bg-default-key-day dark:bg-default-key-night text-black dark:text-white rounded-md cursor-pointer">
       <p className="select-none sm:text-sm font-[1000] place-self-center">enter</p>
     </div>
   )
@@ -36,7 +36,7 @@ function DefaultLetterKey({letter, wordleGame}: {letter: string, wordleGame: Wor
     wordleGame.keyPressEventListener(letter);
   }
   return (
-    <div onClick={onClick} className="grid h-full basis-2/23 bg-square-border-day dark:bg-square-border-night text-black dark:text-white rounded-md cursor-pointer">
+    <div onClick={onClick} className="grid h-full basis-2/23 bg-default-key-day dark:bg-default-key-night text-black dark:text-white rounded-md cursor-pointer">
       <p className="select-none font-[1000] place-self-center">{letter}</p>
     </div>
   )

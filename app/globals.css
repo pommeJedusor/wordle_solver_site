@@ -10,12 +10,14 @@
   --color-valid-letter-day: #C9B458;
   --color-unvalid-letter-day: #787C7E;
   --color-background-day: #FFFFFF;
+  --color-default-key-day: #D3D6DA;
   --color-square-border-day: #D3D6DA;
 
   --color-well-placed-letter-night: #538D4E;
   --color-valid-letter-night: #B59F3B;
   --color-unvalid-letter-night: #3A3A3C;
   --color-background-night: #121213;
+  --color-default-key-night: #818384;
   --color-square-border-night: #3A3A3C;
 
   --breakpoint-xs: 25rem;
