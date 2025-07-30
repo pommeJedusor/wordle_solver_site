@@ -11,16 +11,16 @@ export default function Home() {
         <p className="w-1/3 text-lg mb-2">
           the solver use two lists of words, one is all the words that are usable as guesses
           and the other one is all words that could end up being the solution
-          I found those on internet, don't remember where though,
+          I found those on internet, don&apos;t remember where though,
           it seems to match the ones that other algos use too
           like: <a
             className="underline text-valid-letter-day hover:text-well-placed-letter-day visited:text-unvalid-letter-day dark:text-valid-letter-night dark:hover:text-well-placed-letter-night dark:visited:text-unvalid-letter-night"
             href="http://wordle-page.s3-website-us-east-1.amazonaws.com/">
-            MIT's algorithm
+            MIT&apos;s algorithm
             </a>
         </p>
         <p className="w-1/3 text-lg mb-2">
-          from time to time the solution isn't in the list of possible solutions, so I check server side if it's the case
+          from time to time the solution isn&apos;t in the list of possible solutions, so I check server side if it&apos;s the case
           and if it is I add it to the list of possible solutions
           (due to the different timezones it actually look for the previous and following day of the current one too (UTC))
         </p>
@@ -30,8 +30,8 @@ export default function Home() {
         <p className="w-1/3 text-lg mb-2">
           the way that the algorithm works at its core is that it takes every possible guesses and for each one
           it looks at every possible solution and split them according to their color pattern<br/>
-          (if the possible guess is "apple" then "might" and "right" will both be put in the colors BBBBB where as
-          "light" will be put in BBBYB)<br/>
+          (if the possible guess is &quot;apple&quot; then &quot;might&quot; and &quot;right&quot; will both be put in the colors BBBBB where as
+          &quot;light&quot; will be put in BBBYB)<br/>
           then for each color group, it adds to the total score of the guess:<br/>
           the probability to get the color pattern * the number of words that it would remove from the possible solutions<br/>
           slight problem with that method is that the number of possible guesses and solutions is pretty big
@@ -45,17 +45,17 @@ export default function Home() {
         <p className="w-1/3 text-lg mb-2">
           the optimisation I first tried was to cache the color pattern for every possible possible guess-solution duo
           which worked great reducing from 90 seconds to only 12!
-          though a 'little' problem was that it takes quite a bit of memory and basically just made my vps unusable
+          though a &apos;little&apos; problem was that it takes quite a bit of memory and basically just made my vps unusable
           a bit after I deployed it <br/>
           so I sadly had to remove that optimisation
         </p>
         <h3 className="w-1/3 text-xl font-[500] my-2">Compexity Reducing</h3>
         <p className="w-1/3 text-lg mb-2">
           the second optimisation I came up with, I was doubtfull that it would work great but it really did more so that I could have thought<br/>
-          the idea is actually pretty simple, instead of evaluating each guess one by one on each solution, let's just do a shallow
-          evaluation before, what it means is that we'll first evaluate all possible guesses on max 100 possible solutions
+          the idea is actually pretty simple, instead of evaluating each guess one by one on each solution, let&apos;s just do a shallow
+          evaluation before, what it means is that we&apos;ll first evaluate all possible guesses on max 100 possible solutions
           instead of the max 2309<br/>
-          (if there is already less than that it doesn't change anything)<br/>
+          (if there is already less than that it doesn&apos;t change anything)<br/>
           and then take the 40 guesses that scored the best and evaluate them like we did before<br/>
           which in terms of complexity is great before it was: (n = number of possible solutions, m = number of possible guesses)<br/>
             - n * m (34_300_195 max)<br/>
@@ -70,15 +70,15 @@ export default function Home() {
         <h3 className="w-1/3 text-xl font-[500] my-2">Caching the first two guesses</h3>
         <p className="w-1/3 text-lg mb-2">
           for the 4th one back to the caching strategy but instead of caching the color patterns, I cached the first two guesses
-          but there is a bit more to that, in that I didn't just calcul what my algorithm would give for the first guess and
+          but there is a bit more to that, in that I didn&apos;t just calcul what my algorithm would give for the first guess and
           then the second based on the color pattern instead I did an extensive calcul to get yet better words in the same time<br/>
           the way I did that for both the first and second guesses is that I took the ~20 best guesses and for each one used the algorithm
-          previously described on all possible solutions to evaluate each one's average number of guesses
+          previously described on all possible solutions to evaluate each one&apos;s average number of guesses
           of them and cached the best ones, with that strategy
           I got from 3,54 guesses in average to 3,499, by comparaison the best possible score is 3,421 as achieved by the <a
             className="underline text-valid-letter-day hover:text-well-placed-letter-day visited:text-unvalid-letter-day dark:text-valid-letter-night dark:hover:text-well-placed-letter-night dark:visited:text-unvalid-letter-night"
             href="http://wordle-page.s3-website-us-east-1.amazonaws.com/">
-            MIT's algorithm
+            MIT&apos;s algorithm
             </a>
         </p>
       </section>
@@ -100,7 +100,7 @@ export default function Home() {
           for the yellow/star button on the wordle-solver page, it colors all the guesses to the current included
           according to the current wordle solution, the current local day is collected using js and passing to a request to my backend,
           so that whatever the local timezone, it will color the guesses accordingly
-          (I couldn't just do the request directly from the client to the official wordle site (because of CORS))
+          (I couldn&apos;t just do the request directly from the client to the official wordle site (because of CORS))
         </p>
       </section>
     </div>
