@@ -64,7 +64,7 @@ export function Grid({wordleGame}: {wordleGame: WordleGame[]}) {
         wordleGame[0].setWordleGame([wordleGame[0]]);
       }, 500);
     };
-  }, []);
+  });
 
   return (
     <div className="uppercase text-2xl sm:text-2xl md:text-3xl grid gameMode:grid-rows-12 grid-rows-14 gameMode:grid-cols-10 grid-cols-14 gap-2 h-90 sm:h-105 md:h-120 w-90 sm:w-105 md:w-120 gameMode:w-75 gameMode:sm:w-87 gameMode:md:w-99 dark:bg-background-night bg-background-day">
